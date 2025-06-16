@@ -138,6 +138,11 @@ public class BookController {
 		return "redirect:/";
     	
     }
+    
+    @GetMapping("/upload-book")
+  public String upload() {
+	   return "book/add-book";
+  }
 
 }
 
