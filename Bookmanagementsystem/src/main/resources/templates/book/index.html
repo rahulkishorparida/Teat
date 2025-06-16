@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		
+	<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Index</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	    <style>
+	        .cl{
+	            background-color: yellow;
+	            color: red;
+	        }
+	    </style>
+	</head>
+	<body>
+	    <section id="s1">
+	        <div class="container">
+	            <a href="/add-book">
+	                <button class="btn btn-primary pull-right"type="Submmit" style="border-radius: 0%;" >Add</button>
+	            </a>
+				<a href="/clear-books">
+	                <button class="btn btn-danger pull-right"type="button" style="border-radius: 0%;" onclick="return confirm('are you sure?')">Clear</button>
+				</a>
+					
+	            <table class="table table-bordered">
+	                <thead>
+	                    <tr class="cl">
+	                        <th>Id</th>
+							<th>Book_Id</th>
+	                        <th>Name</th>
+	                        <th>Price</th>
+	                        <th>Location</th>
+							<th>Photo</th>
+	                        <th style="background-color:red; color: white;">Functions</th>
+	                    </tr>
+	                </thead>
+					<tbody>
+					    <tr th:each="book : ${books}">
+					        <td th:text="${book.id}"></td>
+					        <td th:text="${book.book_id}"></td>
+					        <td th:text="${book.name}"></td>
+					        <td th:text="${book.price}"></td>
+					        <td th:text="${book.location}"></td>
+						
+							<td>
+							    <img th:src="@{'/uploads/' + ${book.photo}}" alt="Book Photo" width="50">
+							</td>
+							<td>
+								<a th:href="@{'/view-book/'+ ${book.id}}">
+								    <i class="fa-solid fa-eye"></i>
+								</a>
+
+								<a th:href="@{'/delete-book/'+ ${book.id}}"  onclick="return confirm('are you want to confirm?')">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+									
+								<a th:href="@{'/edit-book/' + ${book.id}}">
+									<i class="fa-solid fa-pencil"></i>
+								</a>
+							</td>
+
+						
+							
+					    </tr>
+					</tbody>
+
+	            </table>
+	        </div>
+	    </section>
+	    
+	</body>
+	</html>

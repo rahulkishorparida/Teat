@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+	    input{
+	        width: 350px !important;
+	    }
+	    .fr{
+	        border: 2px solid greenyellow;
+	        width: 400px !important;
+	    }
+	 
+	</style>
+</head>
+<body>
+    <section id="s1">
+        <div class="container fr"><br>
+			
+			<!-- Show success message -->
+			<div th:if="${successMessage}" class="alert alert-success">
+			    <p th:text="${successMessage}"></p>
+			</div>
+
+			<!-- Show error message -->
+			<div th:if="${errorMessage}" class="alert alert-danger">
+			    <p th:text="${errorMessage}"></p>
+			</div>
+
+			<form th:action="@{/edit-book}" method="post" th:object="${bookk}"  enctype="multipart/form-data" >
+             <div class="form-group">
+				<label for="">ID:</label>
+				<input type="text" class="form-control" th:field="*{id}"  readonly/>
+			 </div>
+                <div class="form-group">
+                    <label for="">Book ID:</label>
+                    <input type="text" class="form-control" th:field="*{book_id}" readonly >
+                </div>
+                <div class="form-group">
+                    <label for="">Book Name:</label>
+                    <input type="text" class="form-control" th:field="*{name}">
+                </div>
+                <div class="form-group">
+                    <label for="">Price</label>
+                    <input type="text" class="form-control" th:field="*{price}">
+                </div>
+                <div class="form-group">
+                    <label for="">Location:</label>
+                    <input type="text" class="form-control" th:field="*{location}">
+                </div>
+				
+				
+				<div class="form-group">
+				    <label>Current Photo:</label><br>
+				    <img th:src="@{'/uploads/' + ${bookk.photo}}" width="100" alt="Current Book Photo">
+				</div>
+
+				<!-- 📁 File input for new image -->
+				<div class="form-group">
+				    <label for="">Upload New Photo:</label>
+				    <input type="file" class="form-control" name="file" >
+				</div>
+				
+				
+				<button type="submit">Submit</button>
+            </form>
+        </div>
+		<a href="/">Back to Home</a>
+
+
+    </section>
+    
+</body>
+</html>
